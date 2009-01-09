@@ -1,0 +1,5 @@
+mvn -e install:install-file -DgroupId=javax.mail -DartifactId=mail -Dversion=1.4 -Dpackaging=jar -Dfile=C:/D/Java/workspace/ServeurMail/lib/mail.jar
+mvn -e install:install-file -DgroupId=javax.activation -DartifactId=activation -Dversion=1.1 -Dpackaging=jar -Dfile=C:/D/Java/workspace/ServeurMail/lib/activation.jar
+mvn -e install:install-file -DgroupId=quartz -DartifactId=quartz -Dversion=1.5.2 -Dpackaging=jar -Dfile=C:/D/Java/workspace/ServeurMail/lib/quartz-1.5.2.jar
+mvn -e install:install-file -DgroupId=commons-logging -DartifactId=commons-logging -Dversion=1.1 -Dpackaging=jar -Dfile=C:/D/Java/workspace/ServeurMail/lib/commons-logging.jar
+mvn -e install:install-file -DgroupId=log4j -DartifactId=log4j -Dversion=1.2.13 -Dpackaging=jar -Dfile=C:/D/Java/workspace/ServeurMail/lib/log4j-1.2.13.jar

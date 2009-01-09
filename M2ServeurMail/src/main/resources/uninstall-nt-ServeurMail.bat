@@ -1,0 +1,1 @@
+JavaService -uninstall ServeurMail
