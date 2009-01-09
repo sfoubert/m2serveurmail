@@ -1,0 +1,1 @@
+java -classpath "../target/ServeurMail.jar;../lib/activation.jar;../lib/mail.jar;../lib/log4j-1.2.13.jar;../lib/commons-logging.jar;../lib/quartz-1.5.2.jar;" fr/ippon/quartz/QuartzTimer
