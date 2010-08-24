@@ -83,13 +83,17 @@
 	<build>
 		<plugins>
 			
+			<!--
+			  Copy all dependencies in one temporary source folder
+			  before running tattletale.
+			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<version>2.1</version>
 				<executions>
 					<execution>
-						<id>copy-dependency-jars-to-tattletale-source-directory</id>
+						<id>copy-dependencies-to-source-directory</id>
 						<phase>pre-site</phase>
 						<goals>
 							<goal>copy-dependencies</goal>
@@ -101,13 +105,16 @@
 				</executions>
 			</plugin>
 
+			<!--
+			  Run tattletale report.
+			-->
 			<plugin>
 				<groupId>org.jboss.tattletale</groupId>
 				<artifactId>tattletale-maven</artifactId>
 				<version>1.1.0.Final</version>
 				<executions>
 					<execution>
-						<id>run-tattletale-report</id>
+						<id>run-tattletale-plugin</id>
 						<phase>site</phase>
 						<goals>
 							<goal>report</goal>
@@ -122,6 +129,34 @@
 					</execution>
 				</executions>
 			</plugin>
+					
+			<!--
+			  Run ant task to delete jars in tattletale-source-directory
+			  because it can take lot of space multi-module projects.
+			-->
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>post-site</phase>
+						<configuration>
+							<tasks>
+								<echo message="Deleting jars in tattletale-source-directory" />
+								<delete>
+									<fileset dir="${project.build.directory}/tattletale-source">
+										<include name="**/*.jar" />
+									</fileset>
+								</delete>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			
 		</plugins>
 	</build>
@@ -143,7 +178,7 @@
 	<distributionManagement>
 		<site>
 			<id>mvn-site</id>
-			<url>file:///var/html/site</url>
+			<url>file:///var/html/maven/site</url>
 		</site>
 	</distributionManagement>
 
