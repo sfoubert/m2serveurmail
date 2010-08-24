@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="M2ServeurMail" default="jboss-tattletale" basedir=".">
+	
+	<property name="lib-build.dir" value="lib-build"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="dest.dir" value="target/site/tattletale"/>
+	
+	<path id="tattletale.class.path">
+		<fileset dir="${lib-build.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="clean" >
+		<delete dir="${dest.dir}" />
+	</target>
+	
+	<target name="jboss-tattletale" depends="clean" >
+		<taskdef name="report"
+		         classname="org.jboss.tattletale.ant.ReportTask"
+		         classpathref="tattletale.class.path"/>
+		
+		<mkdir dir="${dest.dir}"/>
+		<echo message ="Running Tattletale from ${lib.dir} to ${dest.dir}"/>
+		
+		<!-- run tattletale task-->
+		<report source="${lib.dir}" destination="${dest.dir}" />
+
+	</target>
+</project>
